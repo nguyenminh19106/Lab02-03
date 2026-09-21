@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - FurnitureStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2>Đăng ký tài khoản</h2>
+            <form id="registerForm">
+                <div class="input-group">
+                    <label>Họ và tên</label>
+                    <input type="text" id="fullname" required placeholder="Nguyễn Văn A">
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="email" required placeholder="example@email.com">
+                </div>
+                <div class="input-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" id="password" required placeholder="••••••">
+                </div>
+                <div class="input-group">
+                    <label>Xác nhận mật khẩu</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit" class="auth-btn">Đăng ký</button>
+            </form>
+            <p class="auth-link">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const pwd = document.getElementById('password').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            
+            if (pwd !== confirm) {
+                alert('Mật khẩu xác nhận không khớp!');
+                return;
+            }
+            
+            const userData = {
+                fullname: document.getElementById('fullname').value,
+                email: document.getElementById('email').value,
+                password: pwd
+            };
+            
+            localStorage.setItem('user', JSON.stringify(userData));
+            localStorage.setItem('isLoggedIn', 'true');
+            alert('Đăng ký thành công!');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

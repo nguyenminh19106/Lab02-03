@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng - FurnitureStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header-fixed">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">Furniture<span>Store</span></a>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="wishlist-icon">❤️ <span class="wish-count" id="wishCount">0</span></a>
+                <div id="authSection">
+                    <a href="login.html">👤 Đăng nhập</a>
+                </div>
+                <a href="cart.html">🛒 <span class="cart-count" id="cartCount">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="index.html">Trang chủ</a>
+            <a href="#">Danh mục sản phẩm</a>
+            <a href="blog.html">Blog</a>
+            <a href="about.html">Giới thiệu</a>
+            <a href="contact.html">Liên hệ</a>
+        </div>
+    </nav>
+
+    <main class="page-main">
+        <div class="page-container">
+            <h1 class="page-title">🛒 Giỏ hàng của bạn</h1>
+
+            <div id="cartContent">
+                <!-- Giỏ hàng trống -->
+                <div class="cart-empty" id="cartEmpty">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h2>Giỏ hàng trống</h2>
+                    <p>Bạn chưa có sản phẩm nào trong giỏ hàng.</p>
+                    <a href="index.html" class="shop-now-btn">Tiếp tục mua sắm</a>
+                </div>
+
+                <!-- Giỏ hàng có sản phẩm -->
+                <div id="cartItemsContainer" style="display: none;">
+                    <div class="cart-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Đơn giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartItemsList"></tbody>
+                        </table>
+                    </div>
+                    <div class="cart-summary">
+                        <div class="summary-box">
+                            <h3>Tổng đơn hàng</h3>
+                            <div class="summary-row"><span>Tạm tính:</span><span id="subtotal">0₫</span></div>
+                            <div class="summary-row"><span>Phí vận chuyển:</span><span>Miễn phí</span></div>
+                            <div class="summary-row total"><span>Tổng cộng:</span><span id="total">0₫</span></div>
+                            <button class="checkout-btn" onclick="checkout()">✅ Tiến hành thanh toán</button>
+                            <a href="index.html" class="continue-shop">← Tiếp tục mua sắm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>FurnitureStore</h3>
+                <p>Nội thất cao cấp, thiết kế hiện đại cho ngôi nhà của bạn.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Liên hệ</h4>
+                <p>123 Đường Láng, Hà Nội</p>
+                <p>Hotline: 1900 1234</p>
+                <p>Email: support@furniturestore.vn</p>
+            </div>
+            <div class="footer-col">
+                <h4>Chính sách</h4>
+                <p>Chính sách bảo hành</p>
+                <p>Chính sách đổi trả</p>
+                <p>Vận chuyển & lắp đặt</p>
+            </div>
+            <div class="footer-col">
+                <h4>Giờ mở cửa</h4>
+                <p>Thứ 2 - Thứ 7: 8:00 - 21:00</p>
+                <p>Chủ nhật: 9:00 - 18:00</p>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2025 FurnitureStore - Nội thất đẳng cấp</div>
+    </footer>
+
+    <script>
+        // ========== DỮ LIỆU SẢN PHẨM ==========
+        const products = [
+            { id: 1, name: "Sofa da cao cấp", price: 12500000, priceStr: "12,500,000₫", img: "https://bachma.vn/sofa-da-cao-cap-thong-minh-sf3tm-co-chan-do/?srsltid=AfmBOopdLULL5M8qYnyolCf6I67iOSqnG6y4OvmDujeF-TYhpFc3bINr", category: "sofa" },
+            { id: 2, name: "Giường ngủ hiện đại", price: 9800000, priceStr: "9,800,000₫", img: "https://picsum.photos/id/107/300/200", category: "bed" },
+            { id: 3, name: "Bàn ăn mặt đá", price: 5500000, priceStr: "5,500,000₫", img: "https://picsum.photos/id/127/300/200", category: "dining" },
+            { id: 4, name: "Kệ trang trí", price: 2800000, priceStr: "2,800,000₫", img: "https://picsum.photos/id/112/300/200", category: "decor" },
+            { id: 5, name: "Bàn trà mặt kính", price: 4200000, priceStr: "4,200,000₫", img: "https://picsum.photos/id/30/300/200", category: "sofa" },
+            { id: 6, name: "Tủ quần áo 4 cánh", price: 15600000, priceStr: "15,600,000₫", img: "https://picsum.photos/id/109/300/200", category: "bed" }
+        ];
+
+        // ========== GIỎ HÀNG ==========
+        function getCart() {
+            const cart = localStorage.getItem('cart');
+            return cart ? JSON.parse(cart) : [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartSpan = document.getElementById('cartCount');
+            if (cartSpan) cartSpan.innerText = total;
+        }
+
+        // Cập nhật số lượng
+        window.updateCartQuantity = function (productId, newQuantity) {
+            let cart = getCart();
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                if (newQuantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                } else {
+                    item.quantity = newQuantity;
+                }
+                saveCart(cart);
+                renderCartPage();
+            }
+        };
+
+        // Xóa sản phẩm
+        window.removeFromCart = function (productId) {
+            let cart = getCart();
+            cart = cart.filter(i => i.id !== productId);
+            saveCart(cart);
+            renderCartPage();
+        };
+
+        // Format tiền
+        function formatPrice(price) {
+            return price.toLocaleString('vi-VN') + '₫';
+        }
+
+        // Hiển thị giỏ hàng
+        function renderCartPage() {
+            const cart = getCart();
+            const cartEmpty = document.getElementById('cartEmpty');
+            const cartContainer = document.getElementById('cartItemsContainer');
+            const cartList = document.getElementById('cartItemsList');
+            const subtotalSpan = document.getElementById('subtotal');
+            const totalSpan = document.getElementById('total');
+
+            if (!cartList) return;
+
+            if (cart.length === 0) {
+                if (cartEmpty) cartEmpty.style.display = 'block';
+                if (cartContainer) cartContainer.style.display = 'none';
+                return;
+            }
+
+            if (cartEmpty) cartEmpty.style.display = 'none';
+            if (cartContainer) cartContainer.style.display = 'block';
+
+            // Hiển thị danh sách sản phẩm
+            cartList.innerHTML = cart.map(item => `
+                <tr>
+                    <td class="cart-product">
+                        <img src="${item.img}" alt="${item.name}">
+                        <span>${item.name}</span>
+                    </td>
+                    <td>${item.priceStr}</td>
+                    <td>
+                        <div class="quantity-control">
+                            <button onclick="updateCartQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateCartQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                        </div>
+                    </td>
+                    <td>${formatPrice(item.price * item.quantity)}</td>
+                    <td><button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️</button></td>
+                </tr>
+            `).join('');
+
+            // Tính tổng
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            if (subtotalSpan) subtotalSpan.innerText = formatPrice(subtotal);
+            if (totalSpan) totalSpan.innerText = formatPrice(subtotal);
+        }
+
+        // Thanh toán
+        window.checkout = function () {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                alert('Vui lòng đăng nhập để thanh toán!');
+                window.location.href = 'login.html';
+                return;
+            }
+            const cart = getCart();
+            if (cart.length === 0) {
+                alert('Giỏ hàng trống!');
+                return;
+            }
+            alert(`✅ Đặt hàng thành công!\nTổng tiền: ${formatPrice(cart.reduce((s, i) => s + i.price * i.quantity, 0))}\nCảm ơn bạn đã mua hàng!`);
+            localStorage.removeItem('cart');
+            renderCartPage();
+            updateCartCount();
+        };
+
+        // ========== KHỞI TẠO ==========
+        updateCartCount();
+        renderCartPage();
+
+        // Cập nhật số lượng yêu thích
+        const wish = JSON.parse(localStorage.getItem('wishlist')) || [];
+        const wishSpan = document.getElementById('wishCount');
+        if (wishSpan) wishSpan.innerText = wish.length;
+
+        // Kiểm tra đăng nhập
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const user = JSON.parse(localStorage.getItem('user'));
+        const authSection = document.getElementById('authSection');
+        if (isLoggedIn && user && authSection) {
+            authSection.innerHTML = `<span>👤 Xin chào, ${user.fullname} <a href="#" id="logoutBtn" style="color:#a55d35;">(Thoát)</a></span>`;
+            document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = 'index.html';
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FurnitureStore - Nội thất đẳng cấp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .product-card h3 {
+            margin: 0.8rem 0 0.3rem;
+        }
+
+        .price {
+            color: #a55d35;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .product-card button {
+            background: #2c3e2f;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            margin: 0.3rem;
+            cursor: pointer;
+        }
+
+        .product-card button:hover {
+            background: #a55d35;
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            background: #f1ede9;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        .cat-btn.active {
+            background: #a55d35;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Fixed -->
+    <header class="header-fixed"
+        style="position: fixed; top:0; left:0; width:100%; background:white; padding:0.8rem 2rem; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+        <div class="header-container"
+            style="max-width:1400px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+            <div class="logo">
+                <a href="index.html"
+                    style="font-size:1.8rem; font-weight:700; text-decoration:none; color:#a55d35;">Furniture<span
+                        style="color:#2c3e2f;">Store</span></a>
+            </div>
+            <div class="search-bar"
+                style="display:flex; background:#f1ede9; border-radius:40px; padding:0.3rem 0.8rem;">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..."
+                    style="border:none; background:transparent; padding:0.5rem; outline:none; width:200px;">
+                <button id="searchBtn" style="background:none; border:none;"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions" style="display:flex; gap:1.5rem;">
+                <a href="#" class="wishlist-icon" style="color:#3a2c28; position:relative;">
+                    <i class="far fa-heart"></i>
+                    <span class="wish-count" id="wishCount"
+                        style="position:absolute; top:-8px; right:-12px; background:#a55d35; color:white; border-radius:50%; padding:0px 5px; font-size:0.7rem;">0</span>
+                </a>
+                <div id="authSection">
+                    <a href="login.html" class="login-icon" style="color:#3a2c28;"><i class="far fa-user"></i>
+                        <span>Đăng nhập</span></a>
+                </div>
+                <a href="cart.html" class="cart-icon" style="color:#3a2c28; position:relative;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount"
+                        style="position:absolute; top:-8px; right:-12px; background:#a55d35; color:white; border-radius:50%; padding:0px 5px; font-size:0.7rem;">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="index.html">Trang chủ</a>
+
+            <!-- DROPDOWN - Danh mục sản phẩm -->
+            <div class="dropdown">
+                <a href="#">Danh mục sản phẩm <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#" data-category="sofa">🛋️ Bàn ghế phòng khách</a>
+                    <a href="#" data-category="bed">🛏️ Giường tủ phòng ngủ</a>
+                    <a href="#" data-category="dining">🍽️ Bàn ăn nhà bếp</a>
+                    <a href="#" data-category="decor">🖼️ Trang trí nội thất</a>
+                    <a href="#" data-category="office">💼 Nội thất văn phòng</a>
+                    <a href="#" data-category="outdoor">🌿 Nội thất ngoài trời</a>
+                </div>
+            </div>
+
+            <a href="blog.html">Blog</a>
+            <a href="about.html">Giới thiệu</a>
+            <a href="contact.html">Liên hệ</a>
+        </div>
+    </nav>
+
+    <main style="max-width:1400px; margin:0 auto; padding:0 1.5rem 3rem;">
+
+        <!-- Banner Slideshow -->
+        <div class="banner-slideshow" style="position:relative; margin:2rem 0; border-radius:28px; overflow:hidden;">
+            <div class="slides-container" id="slidesContainer" style="display:flex; transition:transform 0.5s ease;">
+                <div class="slide" style="min-width:100%; position:relative;">
+                    <img src="assets/images/banner2.jpg" alt="Giảm giá"
+                        style="width:100%; height:380px; object-fit:cover;">
+                    <div class="slide-caption"
+                        style="position:absolute; bottom:30px; left:40px; background:rgba(0,0,0,0.6); color:white; padding:0.5rem 1.5rem; border-radius:30px;">
+                        🔥 Giảm giá 50% - Bàn ghế phòng khách</div>
+                </div>
+                <div class="slide" style="min-width:100%; position:relative;">
+                    <img src="assets/images/banner1.jpg" alt="Siêu ưu đãi"
+                        style="width:100%; height:380px; object-fit:cover;">
+                    <div class="slide-caption"
+                        style="position:absolute; bottom:30px; left:40px; background:rgba(0,0,0,0.6); color:white; padding:0.5rem 1.5rem; border-radius:30px;">
+                        🎉 Siêu ưu đãi tháng 12</div>
+                </div>
+                <div class="slide" style="min-width:100%; position:relative;">
+                    <img src="assets/images/banner3.webp" alt="Miễn phí vận chuyển"
+                        style="width:100%; height:380px; object-fit:cover;">
+                    <div class="slide-caption"
+                        style="position:absolute; bottom:30px; left:40px; background:rgba(0,0,0,0.6); color:white; padding:0.5rem 1.5rem; border-radius:30px;">
+                        🚚 Miễn phí vận chuyển</div>
+                </div>
+            </div>
+            <button class="prev" onclick="changeSlide(-1)"
+                style="position:absolute; top:50%; left:10px; transform:translateY(-50%); background:rgba(0,0,0,0.5); color:white; border:none; font-size:1.8rem; padding:0.5rem 1rem; border-radius:50%; cursor:pointer;">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)"
+                style="position:absolute; top:50%; right:10px; transform:translateY(-50%); background:rgba(0,0,0,0.5); color:white; border:none; font-size:1.8rem; padding:0.5rem 1rem; border-radius:50%; cursor:pointer;">&#10095;</button>
+        </div>
+
+        <!-- ========== PHẦN MUA HÀNG - SẢN PHẨM ========== -->
+        <section class="product-section">
+            <h2 class="section-title" style="text-align:center; font-size:2rem; color:#2c3e2f; margin-bottom:1rem;">🛋️
+                Sản phẩm nổi bật</h2>
+
+            <div class="category-tabs">
+                <button class="cat-btn active" data-cat="all">Tất cả</button>
+                <button class="cat-btn" data-cat="sofa">Phòng khách</button>
+                <button class="cat-btn" data-cat="bed">Phòng ngủ</button>
+                <button class="cat-btn" data-cat="dining">Phòng ăn</button>
+                <button class="cat-btn" data-cat="decor">Trang trí</button>
+            </div>
+
+            <!-- DANH SÁCH SẢN PHẨM SẼ HIỂN THỊ Ở ĐÂY -->
+            <div class="product-grid" id="productGrid">
+                <!-- Sản phẩm sẽ được JavaScript hiển thị -->
+            </div>
+        </section>
+
+        <!-- Review Slideshow -->
+        <section class="review-section" style="background:#fff6ed; padding:2rem; border-radius:40px; margin-top:3rem;">
+            <h2 class="section-title" style="text-align:center; font-size:2rem; color:#2c3e2f;">Khách hàng nói gì?</h2>
+            <div class="review-slider-container"
+                style="position:relative; overflow:hidden; max-width:800px; margin:0 auto;">
+                <div class="review-slider" id="reviewSlider" style="display:flex; transition:transform 0.5s ease;">
+                    <div class="review-card"
+                        style="min-width:100%; text-align:center; padding:1.5rem; font-style:italic;">"Chất lượng sản
+                        phẩm tuyệt vời, giao hàng nhanh chóng!" - <strong>Minh Anh</strong></div>
+                    <div class="review-card"
+                        style="min-width:100%; text-align:center; padding:1.5rem; font-style:italic;">"Mẫu mã đẹp, nhân
+                        viên tư vấn nhiệt tình!" - <strong>Hoàng Nam</strong></div>
+                    <div class="review-card"
+                        style="min-width:100%; text-align:center; padding:1.5rem; font-style:italic;">"Giá cả hợp lý,
+                        đúng như hình ảnh!" - <strong>Thu Hà</strong></div>
+                </div>
+                <button class="review-prev" id="reviewPrev"
+                    style="position:absolute; top:50%; left:-20px; transform:translateY(-50%); background:#a55d35; color:white; border:none; border-radius:50%; width:40px; height:40px; cursor:pointer;">&#10094;</button>
+                <button class="review-next" id="reviewNext"
+                    style="position:absolute; top:50%; right:-20px; transform:translateY(-50%); background:#a55d35; color:white; border:none; border-radius:50%; width:40px; height:40px; cursor:pointer;">&#10095;</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="background:#2c3e2f; color:#ddd; padding:2rem 1rem 1rem; margin-top:3rem;">
+        <div class="footer-container"
+            style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:2rem;">
+            <div class="footer-col">
+                <h3 style="color:#f1c40f;">FurnitureStore</h3>
+                <p>Nội thất cao cấp, thiết kế hiện đại cho ngôi nhà của bạn.</p>
+            </div>
+            <div class="footer-col">
+                <h4 style="color:#f1c40f;">Liên hệ</h4>
+                <p>123 Đường Láng, Hà Nội</p>
+                <p>Hotline: +84 397462007</p>
+            </div>
+            <div class="footer-col">
+                <h4 style="color:#f1c40f;">Chính sách</h4>
+                <p>Bảo hành</p>
+                <p>Đổi trả</p>
+            </div>
+        </div>
+        <div class="footer-bottom" style="text-align:center; padding-top:1.5rem;">&copy; 2025 FurnitureStore - Nội thất
+            đẳng cấp</div>
+    </footer>
+
+    <script>
+        // Dữ liệu sản phẩm (6 sản phẩm mẫu)
+        const products = [
+            { id: 1, name: "Sofa da cao cấp", price: 12500000, priceStr: "12,500,000₫", img: "assets/images/sofa.jpg", category: "sofa" },
+            { id: 2, name: "Giường ngủ hiện đại", price: 9800000, priceStr: "9,800,000₫", img: "assets/images/giuong.jpg", category: "bed" },
+            { id: 3, name: "Bàn ăn mặt đá", price: 5500000, priceStr: "5,500,000₫", img: "assets/images/ban.jpg", category: "dining" },
+            { id: 4, name: "Kệ trang trí", price: 2800000, priceStr: "2,800,000₫", img: "assets/images/ke.jpg", category: "decor" },
+            { id: 5, name: "Bàn trà mặt kính", price: 4200000, priceStr: "4,200,000₫", img: "assets/images/ban2.jpg", category: "sofa" },
+            { id: 6, name: "Tủ quần áo 4 cánh", price: 15600000, priceStr: "15,600,000₫", img: "assets/images/tu.jpg", category: "bed" }
+        ];
+
+        // Giỏ hàng
+        function getCart() { return JSON.parse(localStorage.getItem('cart')) || []; }
+        function saveCart(cart) { localStorage.setItem('cart', JSON.stringify(cart)); updateCartCount(); }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const total = cart.reduce((s, i) => s + i.quantity, 0);
+            const span = document.getElementById('cartCount');
+            if (span) span.innerText = total;
+        }
+
+        window.addToCart = function (id) {
+            let cart = getCart();
+            let item = cart.find(i => i.id === id);
+            if (item) item.quantity++;
+            else {
+                let p = products.find(p => p.id === id);
+                cart.push({ id: p.id, name: p.name, price: p.price, priceStr: p.priceStr, img: p.img, quantity: 1 });
+            }
+            saveCart(cart);
+            alert('Đã thêm vào giỏ hàng!');
+        };
+
+        window.addToWishlist = function (id) {
+            let wish = JSON.parse(localStorage.getItem('wishlist')) || [];
+            if (!wish.includes(id)) wish.push(id);
+            localStorage.setItem('wishlist', JSON.stringify(wish));
+            document.getElementById('wishCount').innerText = wish.length;
+            alert('Đã thêm yêu thích!');
+        };
+
+        // Hiển thị sản phẩm
+        function renderProducts(cat = 'all', search = '') {
+            let filtered = products;
+            if (cat !== 'all') filtered = filtered.filter(p => p.category === cat);
+            if (search) filtered = filtered.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+
+            const grid = document.getElementById('productGrid');
+            if (grid) {
+                grid.innerHTML = filtered.map(p => `
+                    <div class="product-card">
+                        <img src="${p.img}" alt="${p.name}">
+                        <h3>${p.name}</h3>
+                        <p class="price">${p.priceStr}</p>
+                        <button onclick="addToCart(${p.id})"><i class="fas fa-shopping-cart"></i> Thêm giỏ</button>
+                        <button onclick="addToWishlist(${p.id})"><i class="far fa-heart"></i> Yêu thích</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Category click
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderProducts(btn.dataset.cat, document.getElementById('searchInput')?.value || '');
+            });
+        });
+
+        // Search
+        document.getElementById('searchBtn')?.addEventListener('click', () => {
+            const active = document.querySelector('.cat-btn.active')?.dataset.cat || 'all';
+            renderProducts(active, document.getElementById('searchInput').value);
+        });
+
+        // Slideshow
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const container = document.getElementById('slidesContainer');
+        window.changeSlide = function (d) {
+            slideIndex = (slideIndex + d + slides.length) % slides.length;
+            container.style.transform = `translateX(-${slideIndex * 100}%)`;
+        };
+        setInterval(() => changeSlide(1), 5000);
+
+        // Review slideshow
+        let revIndex = 0;
+        const revSlider = document.getElementById('reviewSlider');
+        const revCards = document.querySelectorAll('.review-card');
+        document.getElementById('reviewPrev')?.addEventListener('click', () => {
+            revIndex = (revIndex - 1 + revCards.length) % revCards.length;
+            revSlider.style.transform = `translateX(-${revIndex * 100}%)`;
+        });
+        document.getElementById('reviewNext')?.addEventListener('click', () => {
+            revIndex = (revIndex + 1) % revCards.length;
+            revSlider.style.transform = `translateX(-${revIndex * 100}%)`;
+        });
+
+        // Dropdown
+        document.querySelectorAll('.dropdown-content a').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const cat = a.dataset.category;
+                if (cat) {
+                    document.querySelectorAll('.cat-btn').forEach(btn => {
+                        if (btn.dataset.cat === cat) btn.click();
+                    });
+                }
+            });
+        });
+
+        // Auth UI
+        function updateAuth() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const user = JSON.parse(localStorage.getItem('user'));
+            const auth = document.getElementById('authSection');
+            if (isLoggedIn && user) {
+                auth.innerHTML = `<div style="display:flex; align-items:center; gap:0.5rem;"><i class="fas fa-user-circle"></i> Xin chào, ${user.fullname} <a href="#" id="logoutBtn" style="color:#a55d35; margin-left:0.5rem;">(Thoát)</a></div>`;
+                document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem('isLoggedIn');
+                    location.reload();
+                });
+            } else {
+                auth.innerHTML = `<a href="login.html" style="color:#3a2c28;"><i class="far fa-user"></i> Đăng nhập</a>`;
+            }
+        }
+
+        // Khởi tạo
+        updateCartCount();
+        updateAuth();
+        renderProducts();
+
+        // Wishlist count
+        const wish = JSON.parse(localStorage.getItem('wishlist')) || [];
+        document.getElementById('wishCount').innerText = wish.length;
+    </script>
+</body>
+
+</html>

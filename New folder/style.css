@@ -1,0 +1,45 @@
+/* index.html */
+/* 1.Primary selector *
+/* Select by tag */
+
+span {
+    background: rgb(201, 220, 235);
+    color: #000000;
+
+}
+
+/* Select by ID */
+
+/* span#top {
+    background: DodgerBlue;
+} */
+
+/* Select by Class */
+
+.text {
+    background-color: blue;
+    color: #ffffff;
+}
+
+/* Nested Selector */
+/* Select by Descendant */
+
+div a {
+    color: green;
+    font-weight: bold;
+}
+
+/* Adjacent Sibling */
+p+p {
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* Direct Child */
+div>span {
+    background: DodgerBlue;
+}
+
+span {
+    background: #fff;
+}

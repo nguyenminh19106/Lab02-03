@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-selector</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <span>Here's a span with some text.</span>
+    <p>Here's a p with some text.</p>
+    <span class="text">Here's a span with more text.</span><br><br>
+    <span class="text" id="top">Here's a span with some text.</span>
+
+    <!-- Select by Descendant -->
+    <div class="items">
+        <a href="#">Item1</a>
+        <a href="#">Item2</a>
+        <a href="#">Item3</a>
+        <ul>
+            <li><a href="#">Item4</a></li>
+            <li><a href="#">Item5</a></li>
+            <li><a href="#">Item6</a></li>
+        </ul>
+    </div>
+
+    <!-- Adjacent sibling -->
+    <div>
+        <p>I'm a paragraph</p>
+        <p>I am selected!</p>
+    </div>
+    <div>
+        <p>I'm a paragraph</p>
+        <h2>Monkey hair</h2>
+        <p>I am NOT selected</p>
+    </div>
+
+    <!-- Direct Child -->
+    <div>
+        <span>Span #1, in the div.
+            <span>Span #2, in the span that's...</span>
+        </span>
+    </div>
+    <span>Span #3, not in the div at all.</span>
+
+
+
+
+
+</body>
+
+</html>

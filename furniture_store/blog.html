@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - FurnitureStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header Fixed -->
+    <header class="header-fixed">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">Furniture<span>Store</span></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="wishlist-icon">
+                    <i class="far fa-heart"></i>
+                    <span class="wish-count" id="wishCount">0</span>
+                </a>
+                <div id="authSection">
+                    <a href="login.html" class="login-icon">
+                        <i class="far fa-user"></i>
+                        <span>Đăng nhập</span>
+                    </a>
+                </div>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="index.html">Trang chủ</a>
+
+            <!-- DROPDOWN - Danh mục sản phẩm -->
+            <div class="dropdown">
+                <a href="#">Danh mục sản phẩm <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#" data-category="sofa">🛋️ Bàn ghế phòng khách</a>
+                    <a href="#" data-category="bed">🛏️ Giường tủ phòng ngủ</a>
+                    <a href="#" data-category="dining">🍽️ Bàn ăn nhà bếp</a>
+                    <a href="#" data-category="decor">🖼️ Trang trí nội thất</a>
+                    <a href="#" data-category="office">💼 Nội thất văn phòng</a>
+                    <a href="#" data-category="outdoor">🌿 Nội thất ngoài trời</a>
+                </div>
+            </div>
+
+            <a href="blog.html">Blog</a>
+            <a href="about.html">Giới thiệu</a>
+            <a href="contact.html">Liên hệ</a>
+        </div>
+    </nav>
+
+    <main class="page-main">
+        <div class="page-container">
+            <h1 class="page-title">Blog nội thất</h1>
+            <p class="page-subtitle">Những xu hướng, mẹo hay và cảm hứng cho ngôi nhà của bạn</p>
+
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <img src="assets/images/ban2.jpg" alt="Xu hướng nội thất 2025">
+                    <div class="blog-info">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 15/12/2025</span>
+                        <h3>Top 5 xu hướng nội thất 2025 bạn không thể bỏ qua</h3>
+                        <p>Khám phá những phong cách thiết kế nội thất đang làm mưa làm gió trong năm 2025, từ
+                            minimalism đến biophilic design.</p>
+                        <a href="#" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="assets/images/sofa.jpg" alt="Mẹo chọn sofa">
+                    <div class="blog-info">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 10/12/2025</span>
+                        <h3>Mẹo chọn sofa phù hợp với không gian phòng khách</h3>
+                        <p>Cách chọn sofa về kích thước, màu sắc và chất liệu để tạo điểm nhấn cho phòng khách thêm sang
+                            trọng.</p>
+                        <a href="#" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="assets/images/ban.jpg" alt="Bí quyết bố trí ánh sáng">
+                    <div class="blog-info">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 05/12/2025</span>
+                        <h3>Bí quyết bố trí ánh sáng cho không gian sống hoàn hảo</h3>
+                        <p>Ánh sáng đóng vai trò quan trọng trong thiết kế nội thất. Tìm hiểu cách bố trí đèn để không
+                            gian thêm ấm cúng.</p>
+                        <a href="#" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="assets/images/ke.jpg" alt="Phong cách Nhật Bản">
+                    <div class="blog-info">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 28/11/2025</span>
+                        <h3>Phong cách Nhật Bản - Sự tinh tế trong từng chi tiết</h3>
+                        <p>Zen-inspired design mang lại sự bình yên và thư thái cho tổ ấm của bạn. Khám phá ngay!</p>
+                        <a href="#" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="assets/images/giuong.jpg" alt="Nội thất thông minh">
+                    <div class="blog-info">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 20/11/2025</span>
+                        <h3>Nội thất thông minh cho căn hộ nhỏ</h3>
+                        <p>Giải pháp tối ưu không gian sống với những món đồ nội thất đa năng, thông minh và tiết kiệm
+                            diện tích.</p>
+                        <a href="#" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="assets/images/tu.jpg" alt="Màu sắc nội thất">
+                    <div class="blog-info">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 15/11/2025</span>
+                        <h3>Phối màu nội thất theo phong thủy</h3>
+                        <p>Chọn màu sắc phù hợp với mệnh của gia chủ để mang lại may mắn và tài lộc cho gia đình.</p>
+                        <a href="#" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>FurnitureStore</h3>
+                <p>Nội thất cao cấp, thiết kế hiện đại cho ngôi nhà của bạn.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Liên hệ</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Đường Láng, Hà Nội</p>
+                <p><i class="fas fa-phone"></i> Hotline: +84 397462007</p>
+                <p><i class="fas fa-envelope"></i> Email: nn4438173@gmail.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>Chính sách</h4>
+                <p>Chính sách bảo hành</p>
+                <p>Chính sách đổi trả</p>
+                <p>Vận chuyển & lắp đặt</p>
+                <p>Thanh toán an toàn</p>
+            </div>
+            <div class="footer-col">
+                <h4>Giờ mở cửa</h4>
+                <p>Thứ 2 - Thứ 7: 8:00 - 21:00</p>
+                <p>Chủ nhật: 9:00 - 18:00</p>
+                <p><i class="fas fa-truck"></i> Giao hàng toàn quốc</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 FurnitureStore - Thiết kế nội thất đẳng cấp. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/auth.js"></script>
+</body>
+
+</html>
